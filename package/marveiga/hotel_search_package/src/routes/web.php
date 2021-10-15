@@ -1,13 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Marveiga\HotelSearchPackage\Http\Controllers\SearchController;
 
-Route::get('search', function(){
-    return view('search::search');
-})->name('search');
 
-Route::post('search', function(Request $request){
-    return $request->all();
+Route::group(['namespace' => 'Marveiga\HotelSearchPackage\Http\Controllers'], function () {
+    Route::get('search', 'SearchController@search')->name('search');
+    Route::post('search', 'SearchController@result');
 });
 

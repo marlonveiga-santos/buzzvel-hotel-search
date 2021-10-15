@@ -9,7 +9,7 @@ use Marveiga\HotelSearchPackage\Services\Search;
 class SearchController extends Controller
 {
     public static function search(){
-        return view('search::search', ['fool' => Search::fetch()]);
+        return view('search::search', ['fool' => Search::normalizer()]);
     }
 
     public function result(Request $request){

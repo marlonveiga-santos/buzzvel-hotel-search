@@ -1,0 +1,19 @@
+{
+    "name": "marveiga/hotel_search_package",
+    "description": "Buzzvel Laravel/PHP Practical exercise package.",
+    "type": "project",
+    "license": "ISC",
+    "autoload": {
+        "psr-4": {
+            "Marveiga\\HotelSearchPackage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marlon Veiga",
+            "email": "marlon_veiga@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

@@ -17,7 +17,7 @@ class Search {
     }
 
     /* Corrige inconsistências no objeto recebido, como dados nulos e campos não utilizados. */
-    public static function normalizer()
+    private static function normalizer()
     {
         $data = self::fetch();
         $collection = [];
@@ -31,6 +31,54 @@ class Search {
                 $collection[] = $item;
             }
         }
-        return json_encode($collection);
+        return $collection;
     }
+
+    private static function distanceCalculator($oLatitude, $oLongitude, $dLatitude, $dLongitude){
+        $theta = ($oLongitude - $dLongitude);
+        $delta = sin(deg2rad($oLatitude)) * sin(deg2rad($dLatitude)) + cos(deg2rad($oLatitude)) * cos(deg2rad($dLatitude)) * cos(deg2rad($theta));
+        $delta = acos($delta);
+        $delta = rad2deg($delta);
+        $unitConversion = $delta * 60 * 1.1515;
+        $result = floatval(($unitConversion * 1.609344));
+        return json_encode($result);
+}
+
+private static function tenCheapest($collection)
+{
+    $result = array_slice($collection, 0, 10);
+    $resultFormatted = [];
+    $price = array_column($result, 2);
+    array_multisort($price, SORT_ASC, $result);
+    foreach($result as $item){
+        $resultFormatted[] = self::outputFormatter($item);
+    }
+    return json_encode($resultFormatted);
+}
+
+private static function outputFormatter($input){
+    $input[1] = number_format($input[1], 3, '.', '.').' KM';
+    $input[2] = $input[2].' EUR';
+    $outputFormatted = implode(', ', $input);
+    return $outputFormatted;
+}
+
+public static function getNearbyHotels($lat, $lon, $order){
+    $collection = [];
+    $data = self::normalizer();
+    foreach($data as $item){
+        $distance = self::distanceCalculator($lat, $lon, $item[1], $item[2]);
+        $collection[] = [$item[0], $distance, $item[3]];
+    }
+    $nearest = array_column($collection, 1);
+    array_multisort($nearest, SORT_ASC, $collection);
+    if($order === 'pricepernight'){
+        return self::tenCheapest($collection);
+    }
+    else{
+        $result = array_slice($collection, 0, 10);
+        return json_encode($result);
+    }
+
+}
 }

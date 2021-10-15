@@ -9,10 +9,18 @@ use Marveiga\HotelSearchPackage\Services\Search;
 class SearchController extends Controller
 {
     public static function search(){
-        return view('search::search', ['fool' => Search::getNearbyHotels('-34.591035804444125', '-58.42752456665039','pricepernight')]);
+        return view('search::search', ['fool' => 'ECHO !!!']);
+    }
+
+    private function getCoordinates($coordinates){
+        $coordinatesArray = explode(',',$coordinates);
+        return $coordinatesArray;
     }
 
     public function result(Request $request){
-        return $request->all();
+        $result = $request->all();
+        $resultCoordinates = $this->getCoordinates($result['coordinates']);
+        $resultCriteria = $result['search_criteria'];
+        return view('search::response', ['zool' => Search::getNearbyHotels($resultCoordinates[0], $resultCoordinates[1], $resultCriteria)]);
     }
 }

@@ -34,6 +34,7 @@ class Search {
         return $collection;
     }
 
+    /* Calcula a distância entre duas coordenadas por meio da fórmula de Haversine */
     private static function distanceCalculator($oLatitude, $oLongitude, $dLatitude, $dLongitude){
         $theta = ($oLongitude - $dLongitude);
         $delta = sin(deg2rad($oLatitude)) * sin(deg2rad($dLatitude)) + cos(deg2rad($oLatitude)) * cos(deg2rad($dLatitude)) * cos(deg2rad($theta));
@@ -41,9 +42,18 @@ class Search {
         $delta = rad2deg($delta);
         $unitConversion = $delta * 60 * 1.1515;
         $result = floatval(($unitConversion * 1.609344));
-        return json_encode($result);
+        return $result;
 }
 
+/* Formata a saída dos dados conforme solicitado */
+private static function outputFormatter($input){
+    $input[1] = number_format($input[1], 3, '.', '.').' KM';
+    $input[2] = $input[2].' EUR';
+    $outputFormatted = implode(', ', $input);
+    return $outputFormatted;
+}
+
+/* Organiza as localidades mais próximas por preço */
 private static function tenCheapest($collection)
 {
     $result = array_slice($collection, 0, 10);
@@ -53,16 +63,21 @@ private static function tenCheapest($collection)
     foreach($result as $item){
         $resultFormatted[] = self::outputFormatter($item);
     }
-    return json_encode($resultFormatted);
+    return $resultFormatted;
 }
 
-private static function outputFormatter($input){
-    $input[1] = number_format($input[1], 3, '.', '.').' KM';
-    $input[2] = $input[2].' EUR';
-    $outputFormatted = implode(', ', $input);
-    return $outputFormatted;
+/* Organiza as localidades mais próximas por distância */
+private static function tenNearest($collection)
+{
+    $result = array_slice($collection, 0, 10);
+    $resultFormatted = [];
+    foreach($result as $item){
+        $resultFormatted[] = self::outputFormatter($item);
+    }
+    return $resultFormatted;
 }
 
+/* Função principal que retorna uma lista com os hotéis mais próximos */
 public static function getNearbyHotels($lat, $lon, $order){
     $collection = [];
     $data = self::normalizer();
@@ -72,12 +87,11 @@ public static function getNearbyHotels($lat, $lon, $order){
     }
     $nearest = array_column($collection, 1);
     array_multisort($nearest, SORT_ASC, $collection);
-    if($order === 'pricepernight'){
+    if(str_contains($order, 'pricepernight')){
         return self::tenCheapest($collection);
     }
     else{
-        $result = array_slice($collection, 0, 10);
-        return json_encode($result);
+        return self::tenNearest($collection);
     }
 
 }

@@ -29,7 +29,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Marveiga\\HotelSearchPackage\\": "package/marveiga/hotel_search_package/src/"
         }
     },
     "scripts": {

@@ -4,11 +4,12 @@ namespace marveiga\HotelSearchPackage\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Marveiga\HotelSearchPackage\Services\Search;
 
 class SearchController extends Controller
 {
     public static function search(){
-        return view('search::search');
+        return view('search::search', ['fool' => Search::fetch()]);
     }
 
     public function result(Request $request){

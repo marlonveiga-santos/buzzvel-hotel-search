@@ -15,5 +15,6 @@
         <input type="text" name="coordinates" id="coord" placeholder="enter your coordinates">
         <input type="submit" value="Search">
     </form>
+    {{$fool}}
 </body>
 </html>

@@ -25,6 +25,6 @@ class SearchController extends Controller
         $result = $request->all();
         $resultCoordinates = $this->getCoordinates($result['coordinates']);
         $resultCriteria = $result['search_criteria'];
-        return view('search::response', ['zool' => Search::getNearbyHotels($resultCoordinates[0], $resultCoordinates[1], $resultCriteria)]);
+        return view('search::response', ['response' => Search::getNearbyHotels($resultCoordinates[0], $resultCoordinates[1], $resultCriteria)]);
     }
 }

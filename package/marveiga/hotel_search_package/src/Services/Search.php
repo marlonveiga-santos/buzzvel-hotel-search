@@ -49,6 +49,8 @@ class Search
     /* Formata a saída dos dados conforme solicitado */
     private static function outputFormatter($input)
     {
+        $input[0] = strtolower($input[0]);
+        $input[0] = ucwords($input[0]);
         $input[1] = number_format($input[1], 3, '.', '.') . ' KM';
         $input[2] = $input[2] . ' EUR';
         $outputFormatted = implode(', ', $input);

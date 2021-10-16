@@ -11,7 +11,7 @@
 <body>
     <h1> Best options for you</h1>
     <ul>
-        @foreach ($zool as $item)
+        @foreach ($response as $item)
         <li>{{$item}}</li>
         @endforeach
     </ul>

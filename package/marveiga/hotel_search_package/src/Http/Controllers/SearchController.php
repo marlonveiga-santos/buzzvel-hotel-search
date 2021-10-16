@@ -13,6 +13,7 @@ class SearchController extends Controller
         return view('search::search', ['fool' => 'ECHO !!!']);
     }
 
+    /* Coleta as coordenadas inseridas por meio da web page. */
     private function getCoordinates($coordinates)
     {
         $coordinatesArray = explode(',', $coordinates);

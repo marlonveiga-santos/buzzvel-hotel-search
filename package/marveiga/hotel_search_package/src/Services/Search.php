@@ -47,6 +47,7 @@ class Search
     }
 
     /* Formata a saída dos dados conforme solicitado */
+    /* Nome dos hotéis capitalizados. Formato numerico de precisão de um metro (0.001) e moeda relativa Euro (EUR) */
     private static function outputFormatter($input)
     {
         $input[0] = strtolower($input[0]);
@@ -58,6 +59,8 @@ class Search
     }
 
     /* Organiza as localidades mais próximas por preço */
+    /* Nota: Considerando 10 pimeiro itens para facilidade de leitura. */
+    /* Nota:  Considerando ainda assim a proximidade do ponto de origem.*/
     private static function tenCheapest($collection)
     {
         $result = array_slice($collection, 0, 10);
@@ -71,6 +74,7 @@ class Search
     }
 
     /* Organiza as localidades mais próximas por distância */
+    /* Nota: Considerando 10 pimeiro itens para facilidade de leitura. */
     private static function tenNearest($collection)
     {
         $result = array_slice($collection, 0, 10);

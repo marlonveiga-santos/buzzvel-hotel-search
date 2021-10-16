@@ -8,16 +8,19 @@ use Marveiga\HotelSearchPackage\Services\Search;
 
 class SearchController extends Controller
 {
-    public static function search(){
+    public static function search()
+    {
         return view('search::search', ['fool' => 'ECHO !!!']);
     }
 
-    private function getCoordinates($coordinates){
-        $coordinatesArray = explode(',',$coordinates);
+    private function getCoordinates($coordinates)
+    {
+        $coordinatesArray = explode(',', $coordinates);
         return $coordinatesArray;
     }
 
-    public function result(Request $request){
+    public function result(Request $request)
+    {
         $result = $request->all();
         $resultCoordinates = $this->getCoordinates($result['coordinates']);
         $resultCriteria = $result['search_criteria'];

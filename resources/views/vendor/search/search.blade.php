@@ -5,24 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Hotel Search</title>
 </head>
 
-<body>
+<body class="text-center">
     <h1>Hotel Search</h1>
-    <h2>Put your coordinates and click in search button.</h2>
-    <form action="{{route('search')}}" method="post">
+    <form action="{{route('search')}}" method="post" class="container w-50 mb-4 jumbotron">
         @csrf
-        <label for="coord">Enter your coordinates (separated by comma)</label>
-        <input type="text" name="coordinates" id="coord" placeholder="enter your coordinates" required="required">
-        <label for="criteria">Search criteria:</label>
-        <select name="search_criteria" id="criteria">
-            <option value=“proximity”>Proximity</option>
-            <option value=“pricepernight”>Price per night</option>
-        </select>
-        <input type="submit" value="Search">
+        <h2 class="mb-4">Put your coordinates and click in search button.</h2>
+        <div class="row d-flex justify-content-center my-3b">
+            <label for="coord">Enter your coordinates (separated by comma)</label>
+            <div class="col-md-10">
+                <input type="text" name="coordinates" id="coord" placeholder="enter your coordinates" size="40"
+                    required="required" class="form-control">
+            </div>
+        </div>
+        <div class="row d-flex flex-column justify-content-center my-3 mx-auto">
+            <label for="criteria" class="text-center">Search criteria:</label>
+            <div>
+                <select name="search_criteria" id="criteria" class="custom-select custom-select-lg mb-3"
+                    style="width:auto;">
+                    <option value=“proximity”>Proximity</option>
+                    <option value=“pricepernight”>Price per night</option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary">
     </form>
-    <a href="/">Home</a>
+    <a href="/" class="btn btn-outline-secondary">Home</a>
 
 </body>
 

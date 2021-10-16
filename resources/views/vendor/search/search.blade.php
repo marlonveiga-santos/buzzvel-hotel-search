@@ -18,10 +18,10 @@
         @csrf
         <h2 class="mb-4">Put your coordinates and click in search button.</h2>
         <div class="row d-flex justify-content-center my-3b">
-            <label for="coord">Enter your coordinates (separated by comma)</label>
+            <label for="coord">Enter your coordinates (numbers separated by comma)</label>
             <div class="col-md-10">
                 <input type="text" name="coordinates" id="coord" placeholder="enter your coordinates" size="40"
-                    required="required" class="form-control">
+                    pattern="[0-9,-. ]+" required="required" class="form-control">
             </div>
         </div>
         <div class="row d-flex flex-column justify-content-center my-3 mx-auto">

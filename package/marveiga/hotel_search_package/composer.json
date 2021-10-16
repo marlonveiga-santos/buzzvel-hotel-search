@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Marveiga\\HotelSearchPackage\\HotelSearchPackageServiceProvider"
+                "marveiga\\HotelSearchPackage\\HotelSearchPackageServiceProvider"
             ]
         }
     }
